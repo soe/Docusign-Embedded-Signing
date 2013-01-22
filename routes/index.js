@@ -36,7 +36,10 @@ exports.embeddedSigningComplete = function(req, res) {
     //
     // jeff?: do you want to do anything if this fails?
     //
-    cs.updateMember(userId);
+    
+    // challenge 2026
+    // moved inside processGetEnvelope and extended the function
+    // cs.updateMember(userId); 
     res.render('SigningComplete/success'
               , { title: "Signing Complete Success!", user: userId });
 
@@ -65,8 +68,11 @@ exports.embeddedSigningComplete = function(req, res) {
   // arguments[0][1] responsebody as string
   //
   function processGetEnvelope(arguments) {
+    console.log('***processGetEnvelope***');
 
-    console.log(JSON.stringify(arguments));
+    // challenge 2026
+    // pass userTabs
+    cs.updateMember(userId, arguments[1]['signers'][0]['tabs']);
   }
   
   function loginComplete (arguments) {
